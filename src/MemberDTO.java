@@ -92,7 +92,7 @@ public class MemberDTO {
         this.businessNum = businessNum;
     }
  public  static  Long idValue = 1L;
-    public MemberDTO(String memberName, String memberMobile, String memberEmail, String memberPass, String memberAddress, String memberNation, int businessNum) {
+    public MemberDTO( String memberEmail,String memberPass, String memberName, String memberMobile,   String memberAddress, String memberNation, int businessNum) {
         this.id = idValue ++ ;
         this.memberName = memberName;
         this.memberMobile = memberMobile;
