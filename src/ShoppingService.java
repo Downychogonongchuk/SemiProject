@@ -10,7 +10,6 @@ public class ShoppingService {
 
     public void registerUser() {
         boolean result = false;
-        int sel = sc.nextInt();
         do {
             System.out.println("가입하실 이메일을 입력하세요");
             String email = sc.next();
@@ -31,6 +30,7 @@ public class ShoppingService {
                 String nation = sc.next();
                 System.out.println("사업자 회원이십니까?");
                 System.out.println("1. yes | 2. no");
+                int sel = sc.nextInt();
                 if (sel == 1) {
                     System.out.println("사업자번호를 입력하세요");
                     int businessNum = sc.nextInt();
@@ -67,8 +67,10 @@ public class ShoppingService {
             int price = productDTO.getProductPrice();
             int total = fee + price;
             System.out.println("상품명: " + productDTO.getProductName() + "\t" + "상품 가격: " + productDTO.getProductPrice() + "\t" + "배송료 : " + fee + "총 가격: " + total);
-            MemberDTO memberDTO = shoppingRepository.payment(productDTO, total); // 제품 결제
-            memberDTO.getBuyList().add(productDTO); // 구매정보 저장
+         List<ProductListDTO>productListDTOList =  shoppingRepository.payment(productDTO, total); // 제품 결제
+            for (ProductListDTO productListDTO:productListDTOList) {
+                System.out.println(productListDTO);
+            }
         }
     }
 
@@ -92,17 +94,18 @@ public class ShoppingService {
             System.out.println("로그인이 필요한 서비스 입니다.");
         } else {
             while (true) {
-                int sel = sc.nextInt();
                 System.out.println("----------------------------------------------------");
                 System.out.println("1. 상품 등록 | 2. 등록 상품 취소 | 3. 페이 충전 | 4.구매한 상품 리스트 | 5. 종료");
                 System.out.println("----------------------------------------------------");
+                int sel = sc.nextInt();
                 if (sel == 1) {
                     int businessNum = shoppingRepository.businessCheck();
-                    if (businessNum ==0){
+                    if (businessNum !=0){
+                        productService.registerProduct(businessNum);
+                    }else {
                         System.out.println("사업자 회원이 아닙니다.");
                         break;
                     }
-                    productService.registerProduct(businessNum);
                 }
 
             if (sel == 2) {

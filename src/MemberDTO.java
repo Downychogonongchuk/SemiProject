@@ -100,6 +100,7 @@ public class MemberDTO {
         this.memberPass = memberPass;
         this.memberAddress = memberAddress;
         this.memberNation = memberNation;
+        this.businessNum = businessNum;
     }
 
     @Override

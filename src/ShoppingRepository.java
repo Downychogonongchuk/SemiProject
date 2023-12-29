@@ -4,6 +4,7 @@ import java.util.List;
 public class ShoppingRepository {
     public static List<MemberDTO> memberDTOList = new ArrayList<>();
     public static List<ProductDTO> productDTOList = new ArrayList<>();
+    public static List<ProductListDTO>productListDTOList =new ArrayList<>();
 
 
     public boolean emailCheck(String email) { // 이메일 중복체크
@@ -27,37 +28,37 @@ public class ShoppingRepository {
         }
     }
 
-    public MemberDTO payment(ProductDTO productDTO, int total) { // 결제
-        MemberDTO memberDTO = null;
+    public List<ProductListDTO> payment(ProductDTO productDTO, int total) { // 결제
         for (int i = 0; i < memberDTOList.size(); i++) {
             if (Common.loginEmail.equals(memberDTOList.get(i).getMemberEmail())) {
                 int blance = memberDTOList.get(i).getBlance();
                 if (blance > total) {
                     blance -= total;
                     memberDTOList.get(i).setBlance(blance);
-                    memberDTO = memberDTOList.get(i);
-                } else {
-                    System.out.println("잔액이 부족합니다.");
+                    ProductListDTO productListDTO = new ProductListDTO(productDTO);
+                    productListDTOList.add(productListDTO);
+
                 }
             }
         }
-        return memberDTO;
+        return productListDTOList;
     }
 
-    public int businessCheck() {
+    public int businessCheck() {  // 사업자 회원 체크
         int businessNum = 0;
         for (int i = 0; i < memberDTOList.size(); i++) {
             if (Common.loginEmail.equals(memberDTOList.get(i).getMemberEmail())) {
-                if (0 < memberDTOList.get(i).getBusinessNum()) {
+                if (memberDTOList.get(i).getBusinessNum() != 0) {
                     businessNum = memberDTOList.get(i).getBusinessNum();
                 }
             }
-        }return businessNum;
+        }
+        return businessNum;
     }
 
     public void rechargePay(int pay) {
         for (int i = 0; i < memberDTOList.size(); i++) {
-            if (Common.loginEmail.equals(memberDTOList.get(i).getMemberEmail())){
+            if (Common.loginEmail.equals(memberDTOList.get(i).getMemberEmail())) {
                 int blance = memberDTOList.get(i).getBlance();
                 blance += pay;
                 memberDTOList.get(i).setBlance(blance);
@@ -66,11 +67,12 @@ public class ShoppingRepository {
     }
 
     public List<ProductDTO> buyHistory() {
-        for (int i = 0; i <memberDTOList.size() ; i++) {
-            if (Common.loginEmail.equals(memberDTOList.get(i).getMemberEmail())){
-                 List<ProductDTO> productDTOList =  memberDTOList.get(i).getBuyList();
+        for (int i = 0; i < memberDTOList.size(); i++) {
+            if (Common.loginEmail.equals(memberDTOList.get(i).getMemberEmail())) {
+                List<ProductDTO> productDTOList = memberDTOList.get(i).getBuyList();
             }
-        } return  productDTOList;
+        }
+        return productDTOList;
     }
 }
 

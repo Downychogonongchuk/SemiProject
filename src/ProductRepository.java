@@ -18,7 +18,7 @@ public class ProductRepository {
     }
 
     public   List<ProductDTO> searchProduct(String search) {
-        List<ProductDTO> searchList = null;
+        List<ProductDTO> searchList =new ArrayList<>();
         for (int i = 0; i < productDTOList.size(); i++) {
             if (productDTOList.get(i).getProductName().contains(search)) {
                 searchList.add(productDTOList.get(i));
@@ -42,12 +42,6 @@ public class ProductRepository {
         }
     }
 
-    public ProductDTO buyHistory() {
-
-
-        }
-
-        }
     }
 
 
