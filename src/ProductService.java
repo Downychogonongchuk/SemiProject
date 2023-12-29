@@ -1,6 +1,5 @@
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 public class ProductService {
     ProductRepository productRepository = new ProductRepository();
@@ -29,14 +28,7 @@ public class ProductService {
             productRepository.registerProduct(productDTO);
         }
 
-    public void deleteProduct() {
-    }
 
-    public void rechargePay() {
-    }
-
-    public void buyHistory() {
-    }
 
 
     }

@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ProductRepository {
-    List<ProductDTO> productDTOList= new ArrayList<>();
+    public static List<ProductDTO> productDTOList= new ArrayList<>();
 
     public   ProductDTO searchProductId(Long productId) {
         ProductDTO productDTO = null;
@@ -34,6 +34,21 @@ public class ProductRepository {
         productDTOList.add(productDTO);
     }
 
-}
+    public void deleteProduct(int businessNum, Long productId) {
+        for (int i = 0; i <productDTOList.size() ; i++) {
+            if (businessNum==productDTOList.get(i).getBusinessNum() && productId.equals(productDTOList.get(i).getProductId())){
+                productDTOList.remove(i);
+            }
+        }
+    }
+
+    public ProductDTO buyHistory() {
+
+
+        }
+
+        }
+    }
+
 
 
