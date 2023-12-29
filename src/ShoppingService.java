@@ -122,6 +122,9 @@ public class ShoppingService {
             }
             if (sel == 4) {
               List<ProductDTO>productDTOList = shoppingRepository.buyHistory();
+                for (ProductDTO productDTO:productDTOList) {
+                    System.out.println("제품ID:  " + productDTO.getProductId() + "\t" + "제품명:  " + productDTO.getProductName() + "\t" + "가격: " + productDTO.getProductPrice() + "\t");
+                }
             }
             if (sel == 5) {
                 break;
@@ -130,8 +133,5 @@ public class ShoppingService {
     }
 }
 
-
-    public void productTop5() {
-    }
 
 }

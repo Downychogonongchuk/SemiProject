@@ -68,8 +68,7 @@ public class ShoppingRepository {
     public List<ProductDTO> buyHistory() {
         for (int i = 0; i <memberDTOList.size() ; i++) {
             if (Common.loginEmail.equals(memberDTOList.get(i).getMemberEmail())){
-                 List<ProductDTO> productDTOList1 =  memberDTOList.get(i).getBuyList();
-
+                 List<ProductDTO> productDTOList =  memberDTOList.get(i).getBuyList();
             }
         } return  productDTOList;
     }
